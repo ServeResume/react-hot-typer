@@ -46,7 +46,6 @@
     "webpack-umd-external": "^1.0.2"
   },
   "dependencies": {
-    "inline-style-prefixer": "^2.0.5",
     "react": "^15.5.3"
   }
 }
