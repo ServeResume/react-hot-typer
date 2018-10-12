@@ -26,98 +26,104 @@ export default class MovingCursor extends React.Component {
     );
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  componentDidUpdate(prevProps, prevState) {
     const {
-      state: { currentTextIndex, currentText, textToBe, isTyping },
+      state: {
+        currentTextIndex,
+        currentText,
+        textToBe,
+        isTyping,
+        highlightedText,
+        isFinished
+      },
       props: { text, speedOfLoop, typingRate, highlightDuration, onFinish }
     } = this;
 
     if (
-      nextState.isTyping &&
-      nextState.currentTextIndex < text.length &&
-      (currentText !== nextState.currentText || nextState.isTyping !== isTyping)
+      isTyping &&
+      currentTextIndex < text.length &&
+      (prevState.currentText !== currentText || isTyping !== prevState.isTyping)
     ) {
       const currentTextDirection = getCommonText(
-        nextState.currentText,
-        nextState.textToBe
-      ).includes(nextState.currentText);
+        currentText,
+        textToBe
+      ).includes(currentText);
       let newState =
-        nextState.currentText === textToBe
+        currentText === prevState.textToBe
           ? {
               isTyping: false,
-              textToBe: Array.isArray(text) ? text[currentTextIndex + 1] : text,
-              currentTextIndex: currentTextIndex + 1
+              textToBe: Array.isArray(text)
+                ? text[prevState.currentTextIndex + 1]
+                : text,
+              currentTextIndex: prevState.currentTextIndex + 1
             }
           : {
               highlightedText: currentTextDirection
                 ? ''
-                : nextState.currentText.substr(
+                : currentText.substr(
                     Number(
-                      nextState.currentText.length -
-                        getCommonText(nextState.currentText, nextState.textToBe)
-                          .length
+                      currentText.length -
+                        getCommonText(currentText, textToBe).length
                     )
                   ),
               currentText: currentTextDirection
-                ? nextState.currentText + textToBe[nextState.currentText.length]
-                : nextState.currentText.slice(
+                ? currentText + prevState.textToBe[currentText.length]
+                : currentText.slice(
                     0,
                     Number(
-                      getCommonText(nextState.currentText, nextState.textToBe)
-                        .length - nextState.currentText.length
+                      getCommonText(currentText, textToBe).length -
+                        currentText.length
                     )
                   )
             };
       setTimeout(
         this.setState.bind(this, newState),
-        nextState.highlightedText ? highlightDuration : typingRate
+        highlightedText ? highlightDuration : typingRate
       );
     }
     if (
-      !nextState.isTyping &&
-      nextState.isTyping !== this.state.isTyping &&
-      nextState.currentTextIndex < text.length &&
-      nextState.textToBe !== nextState.currentText
+      !isTyping &&
+      isTyping !== prevState.isTyping &&
+      currentTextIndex < text.length &&
+      textToBe !== currentText
     ) {
-      const isCurrentCommon = getCommonText(
-        nextState.currentText,
-        nextState.textToBe
-      ).includes(nextState.currentText);
+      const isCurrentCommon = getCommonText(currentText, textToBe).includes(
+        currentText
+      );
       let newState = {
         isTyping: true,
         currentText: isCurrentCommon
-          ? nextState.currentText +
-            text[currentTextIndex + 1][nextState.currentText.length]
-          : nextState.currentText.slice(
+          ? currentText +
+            text[prevState.currentTextIndex + 1][currentText.length]
+          : currentText.slice(
               0,
               Number(
-                getCommonText(nextState.currentText, nextState.textToBe)
-                  .length - nextState.currentText.length
+                getCommonText(currentText, textToBe).length - currentText.length
               )
             ),
         highlightedText: isCurrentCommon
           ? ''
-          : nextState.currentText.substr(
+          : currentText.substr(
               Number(
-                getCommonText(nextState.currentText, nextState.textToBe)
-                  .length - nextState.currentText.length
+                getCommonText(currentText, textToBe).length - currentText.length
               )
             )
       };
       setTimeout(this.setState.bind(this, newState), speedOfLoop);
     }
-    if (nextState.currentTextIndex === text.length && nextState.isTyping) {
+    if (currentTextIndex === text.length && isTyping) {
       this.setState({
         isTyping: false
       });
     }
 
     const finalTextCondition =
-      currentTextIndex === (Array.isArray(text) ? text.length - 1 : 0);
+      prevState.currentTextIndex ===
+      (Array.isArray(text) ? text.length - 1 : 0);
     if (
       finalTextCondition &&
-      textToBe === currentText &&
-      !nextState.isFinished
+      prevState.textToBe === prevState.currentText &&
+      !isFinished
     ) {
       if (onFinish) onFinish();
       this.setState({ isFinished: true });
@@ -128,7 +134,7 @@ export default class MovingCursor extends React.Component {
     text: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string)
-    ]),
+    ]).isRequired,
     hideCursorOnEnd: PropTypes.bool,
     speedOfLoop: PropTypes.number,
     typingRate: PropTypes.number,
@@ -137,15 +143,8 @@ export default class MovingCursor extends React.Component {
   };
 
   static defaultProps = {
-    text: [
-      'Make your text animated',
-      'Make your text elegent',
-      'Make your text stylish',
-      'Make your text stylish with ZERO effort from you ;).'
-    ],
     speedOfLoop: 1100,
     typingRate: 100,
-    initialDelay: 500,
     cursorFlashRate: 200,
     highlightDuration: 150,
     hideCursorOnEnd: true

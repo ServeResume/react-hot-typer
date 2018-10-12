@@ -12,19 +12,19 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/static/'
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
   module: {
-    loaders: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loaders: ['react-hot-loader', 'babel-loader']
-    }]
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loaders: ['babel-loader']
+      }
+    ]
   },
   resolve: {
-    modules: ['src', 'node_modules'],
+    modules: ['src', 'node_modules']
   },
   target: 'web', // Make web variables accessible to webpack, e.g. window
-  stats: true, // Don't show stats in the console
+  stats: true // Don't show stats in the console
 };
