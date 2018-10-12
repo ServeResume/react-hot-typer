@@ -1,6 +1,6 @@
 {
   "name": "react-hot-typer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A React component that simulates typing your text, with Zero dependences.",
   "homepage": "https://github.com/ResumeInDesign/react-hot-typer",
   "main": "index.js",

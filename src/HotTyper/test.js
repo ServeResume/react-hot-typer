@@ -1,7 +1,7 @@
 import React from 'react';
 import MovingCursor from './index';
 
-const WrapperStyle = {
+const wrapperStyle = {
   fontFamily: 'Comic Sans MS',
   color: '#fff',
   fontWeight: 'bold',
@@ -23,7 +23,7 @@ const WrapperStyle = {
 export default class Test extends React.Component {
   render() {
     return (
-      <div style={WrapperStyle}>
+      <div style={wrapperStyle}>
         <div
           style={{
             maxWidth: '500px',
