@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import HotTyper from './HotTyper/test';
+import HotTyper from './HotTyper/test';
 
-ReactDOM.render(<div>hello, npm!</div>, document.getElementById('root'));
+ReactDOM.render(<HotTyper />, document.getElementById('root'));
