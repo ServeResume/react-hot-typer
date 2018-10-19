@@ -13,10 +13,9 @@ const wrapperStyle = {
   minHeight: '100vh',
   width: '100%',
   padding: '20px',
-  background:
-    'url(https://avatars.mds.yandex.net/get-pdb/199965/8b8db02f-371c-4eb6-8b45-6a2ead5e44fa/orig) center no-repeat',
+  backgroundImage: 'linear-gradient(to right, #4facfe 0%, #00f2fe 100%)',
   backgroundSize: 'cover',
-  boxShadow: 'inset 0 0 0 1000px rgba(0, 0, 0, 0.5)',
+  boxShadow: 'inset 0 0 0 1000px rgba(0, 0, 0, 0.25)',
   boxSizing: 'border-box',
   textShadow: '-3px 3px 3px rgba(0,0,0,.7)'
 };
@@ -33,6 +32,7 @@ class Test extends React.Component {
           }}
         >
           <MovingCursor
+            style={{ fontSize: 32 }}
             text={[
               'Make your text animated',
               'Make your text elegent',
