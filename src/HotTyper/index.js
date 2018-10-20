@@ -147,7 +147,8 @@ export default class MovingCursor extends React.Component {
     typingRate: 100,
     cursorFlashRate: 200,
     highlightDuration: 150,
-    hideCursorOnEnd: true
+    hideCursorOnEnd: true,
+    initialDelay: 800
   };
   render() {
     const {
