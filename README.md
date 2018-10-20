@@ -1,4 +1,4 @@
-# react-motion-grid
+# react-hot-typer
 
 **A light component that simulates typing and deleting your text, without any dependencies.**
 
