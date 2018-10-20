@@ -1,6 +1,6 @@
 # react-motion-grid
 
-**A light component that simulates typing and deleting your text, without any dependences.**
+**A light component that simulates typing and deleting your text, without any dependencies.**
 
 ![GIF demo](https://user-images.githubusercontent.com/20513793/47254614-0d04bd80-d465-11e8-9800-79b3fb7956c3.gif)
 
