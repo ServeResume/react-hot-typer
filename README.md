@@ -20,12 +20,10 @@ Then you can use it with your components:
 
 ```jsx
 Import HotTyper from 'react-hot-typer';
-// ...The rest of your code
 
-render() {
+const AnimatedText = () => {
   return (
-    <YourJSX>
-      ...
+    <div style={{ fontSize: 18, fontFamily: '"Comic Sans MS", cursive, sans-serif' }}>
       <HotTyper
         text={[
           'Make your text animated',
@@ -34,9 +32,8 @@ render() {
           'Make your text stylish with ZERO effort from you ;).'
         ]}
       />
-      ...
-    </YourJSX>
-  )
+    </div>
+  );
 }
 ```
 
@@ -62,7 +59,6 @@ Please read [CONTRIBUTING](CONTRIBUTING.md) file for details on our code of cond
 
 ## Authors
 
-- **[Kareem Elbahrawy](https://github.com/bitriddler)**
 - **[Yasser Hennawi](https://github.com/yasserhennawi)**
 
 ## License
