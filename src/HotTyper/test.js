@@ -39,6 +39,7 @@ class Test extends React.Component {
               'Make your text stylish',
               'Make your text stylish with ZERO effort from you ;).'
             ]}
+            cursor={'I'}
           />
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getCommonText } from './helpers';
-import Cursor from './Cursor';
+import Cursor, { cursorPropType } from './Cursor';
 
 export default class MovingCursor extends React.Component {
   constructor(props) {
@@ -139,7 +139,8 @@ export default class MovingCursor extends React.Component {
     speedOfLoop: PropTypes.number,
     typingRate: PropTypes.number,
     cursorFlashRate: PropTypes.number,
-    initialDelay: PropTypes.number
+    initialDelay: PropTypes.number,
+    cursor: cursorPropType
   };
 
   static defaultProps = {
@@ -152,7 +153,7 @@ export default class MovingCursor extends React.Component {
   };
   render() {
     const {
-      props: { cursorFlashRate, className, style, hideCursorOnEnd },
+      props: { cursorFlashRate, className, style, hideCursorOnEnd, cursor },
       state: { isTyping, currentText, highlightedText, isFinished }
     } = this;
 
@@ -168,6 +169,7 @@ export default class MovingCursor extends React.Component {
             isHighlighted={!!highlightedText}
             flashing={!isTyping}
             cursorFlashRate={cursorFlashRate}
+            cursor={cursor}
           />
         </span>
       </span>
