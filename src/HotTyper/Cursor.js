@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+export const cursorPropType = PropTypes.oneOfType([
+  PropTypes.node,
+  PropTypes.string
+]);
+
 export default class Cursor extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +18,7 @@ export default class Cursor extends React.Component {
     style: PropTypes.object,
     flashing: PropTypes.bool,
     cursorFlashRate: PropTypes.number,
-    cursor: PropTypes.oneOfType([PropTypes.node, PropTypes.string])
+    cursor: cursorPropType,
   };
 
   static defaultProps = {
