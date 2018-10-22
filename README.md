@@ -19,7 +19,7 @@ OR (if you prefer `yarn`)
 Then you can use it with your components:
 
 ```jsx
-Import HotTyper from 'react-hot-typer';
+import HotTyper from 'react-hot-typer';
 
 const AnimatedText = () => {
   return (
